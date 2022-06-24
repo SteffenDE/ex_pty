@@ -3,6 +3,8 @@ defmodule ExPty do
   Documentation for `ExPty`.
   """
 
+  @target Mix.target()
+
   @doc """
   Opens the specific program inside a pseudo terminal.
 
@@ -18,7 +20,7 @@ defmodule ExPty do
   """
   def open(args \\ ["bash", "-i"]) do
     Port.open(
-      {:spawn_executable, Application.app_dir(:ex_pty, "/priv/port_pty")},
+      {:spawn_executable, Application.app_dir(:ex_pty, "/priv/#{@target}/port_pty")},
       [
         :binary,
         :nouse_stdio,
@@ -28,10 +30,16 @@ defmodule ExPty do
     )
   end
 
+  @doc """
+  Send data to the pty.
+  """
   def send_data(port, data) do
     Port.command(port, :erlang.term_to_binary({:data, data}))
   end
 
+  @doc """
+  Change the window size of the pty.
+  """
   def winsz(port, rows, cols) do
     Port.command(port, :erlang.term_to_binary({:winsz, rows, cols}))
   end

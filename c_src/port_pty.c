@@ -1,4 +1,5 @@
 // code adapted from http://www.rkoucha.fr/tech_corner/pty_pdip.html
+#define _XOPEN_SOURCE 600
 #include "ei.h"
 #include <errno.h>
 #include <fcntl.h>

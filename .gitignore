@@ -26,5 +26,3 @@ ex_pty-*.tar
 /tmp/
 
 /.elixir_ls
-
-/priv/ex_pty

@@ -1,4 +1,4 @@
-defmodule ExPty.MixProject do
+defmodule ExPTY.MixProject do
   use Mix.Project
 
   def project do

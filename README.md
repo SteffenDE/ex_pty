@@ -1,21 +1,33 @@
-# ExPty
+# ExPTY
 
-**TODO: Add description**
+Run any system command in a pseudo terminal inside a GenServer process.
+
+**Be warned**: my C code works, but is very ugly
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_pty` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `ex_pty` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:ex_pty, "~> 0.1.0"}
+    {:ex_pty, github: "SteffenDE/ex_pty"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/ex_pty>.
+## Usage
 
+```elixir
+iex()> {:ok, pty} = ExPTY.start_link(handler: self())
+iex()> flush()
+{#PID<0.257.0>, {:data, "bash-3.2$ "}}
+iex()> ExPTY.send_data(pty, "echo cool\n")
+:ok
+iex()> flush()
+{#PID<0.257.0>, {:data, "echo cool\r\ncool\r\nbash-3.2$ "}}
+iex()> ExPTY.send_data(pty, "exit\n")
+:ok
+iex()> flush()
+{:EXIT, #PID<0.257.0>, :normal}
+```

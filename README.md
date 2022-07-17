@@ -1,8 +1,10 @@
 # ExPTY
 
+For something that can be used in production, have a look at [erlexec](https://github.com/saleyn/erlexec).
+
 Run any system command in a pseudo terminal inside a GenServer process.
 
-**Be warned**: my C code works, but is very ugly
+**Be warned**: my C code seems to work, but is very ugly
 
 ## Installation
 
